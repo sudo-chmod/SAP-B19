@@ -22,12 +22,12 @@ router.post('/login', async (req, res) => {
             }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '15m' }
         )
 
-        res.cookie('accessToken', accessToken, {
+        res.cookie('SAPB19accessToken', accessToken, {
                 httpOnly: true,
                 secure: true,
                 sameSite: 'none',
                 maxAge: 1000 * 60 * 60 * 15
-            })
+        })
 
         res.status(200).send({message: 'Login success'})
     } catch (error) {
@@ -36,7 +36,7 @@ router.post('/login', async (req, res) => {
 });
 
 router.get('/logout', (req, res) => {
-    res.clearCookie('accessToken')
+    res.clearCookie('SAPB19accessToken')
     res.status(200).send({ message: 'Logout success' })
 });
 
