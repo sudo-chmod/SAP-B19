@@ -6,7 +6,6 @@ require('dotenv').config()
 
 const authRoutes = require("./routes/auth")
 const studentRoutes = require("./routes/student")
-const isAuth = require('./middleware')
 
 const app = express()
 const PORT = process.env.PORT
@@ -17,7 +16,6 @@ app.use(express.json())
 app.use(cookieParser())
 
 app.use("/api/auth", authRoutes)
-app.use(isAuth)
 app.use('/api/student', studentRoutes)
 
 mongoose.connect(DB_URL)
