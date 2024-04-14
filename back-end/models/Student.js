@@ -1,23 +1,23 @@
 const mongoose = require("mongoose");
 
 const resultSchema = new mongoose.Schema({
-    code: {
+    subCode: {
         type: String,
         required: true
     },
-    name: {
+    subName: {
         type: String,
         required: true
     },
-    grade: {
+    subGrade: {
         type: String,
         required: true
     },
-    credit: {
+    subCredit: {
         type: Number,
         required: true
     },
-    creditXgrade: {
+    subCreditXGrade: {
         type: Number,
         required: true
     }
@@ -54,7 +54,7 @@ const studentSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
-    totalCreditXgrade: {
+    totalCreditXGrade: {
         type: Number,
         required: true
     },
