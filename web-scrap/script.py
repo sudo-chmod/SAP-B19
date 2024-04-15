@@ -29,6 +29,8 @@ def insert_data_and_update_ranks(df, degree_program):
         }
         collection.insert_one(data)
 
+    print(f"All {degree_program} data inserted")
+
     df_rank = pd.DataFrame({"Index": index_arr, "GPA": gpa_arr})
     df_rank["Rank"] = df_rank["GPA"].rank(ascending=False).astype(int)
     for i in range(raw_count):
@@ -37,7 +39,7 @@ def insert_data_and_update_ranks(df, degree_program):
         collection.update_one({"index": index}, {"$set": {"rank": rank}})
         print(f"{i + 1} | {index} | Rank: {rank}")
 
-    print(f"All {degree_program} data inserted and ranks updated")
+    print(f"All {degree_program} ranks updated")
 
 
 client = pymongo.MongoClient(config.MONGODB_URI, tlsCAFile=certifi.where())
