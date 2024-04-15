@@ -1,28 +1,24 @@
-import jwt from 'jsonwebtoken';
-const router = require('express').Router();
-const Student = require('../models/Student');
+const router = require('express').Router()
+const Student = require('../models/Student')
 
-router.get('/', async (req, res) => {
+router.post('/', async (req, res) => {
     try {
-        const token = req.cookies.SAPB19accessToken
+        const index = req.body.index
+        const nic = req.body.nic
 
-        if (!token)
-            return res.status(401).send({ message: 'Unauthorized' })
+        const student = await Student.findOne({ index })
 
-        jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, async (err, decoded) => {
-            if (err)
-                return res.status(403).send({ message: 'Forbidden' })
-            const student = await Student.findOne({ index: decoded.index });
-    
-            if (!student)
-                return res.status(404).send({ message: 'Student not found' });
-            res.status(200).json(student);
-        })
+        if (!student)
+            return res.status(404).send({ message: 'Index not found' })
+
+        if (student.nic != nic)
+            return res.status(401).send({ message: 'Invalid NIC' })
+
+        return res.status(200).send(student)
 
     } catch (error) {
-        return res.status(500).json(error);
+        return res.status(500).json(error)
     }
 });
 
-module.exports = router;
-            
+module.exports = router
