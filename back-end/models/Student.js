@@ -43,7 +43,7 @@ const studentSchema = new mongoose.Schema({
         required: true
     },
     rank: {
-        type: Number,
+        type: String,
         required: true
     },
     gpa: {
