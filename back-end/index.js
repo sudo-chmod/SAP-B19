@@ -13,7 +13,7 @@ app.use(express.json())
 app.use(cors())
 
 app.use('/', (req, res) => {
-    res.json('Server is Running!')
+    res.send('Server is Running!')
 })
 
 app.use('/api/student', studentRoutes)
