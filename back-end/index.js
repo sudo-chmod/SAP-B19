@@ -13,6 +13,9 @@ app.use(cors())
 app.use(express.json())
 
 app.use('/api/student', studentRoutes)
+app.use('*', (req, res) => {
+    res.send('404 - Not Found!')
+})
 
 mongoose.connect(DB_URL)
     .then(() => {

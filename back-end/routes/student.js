@@ -9,15 +9,15 @@ router.post('/', async (req, res) => {
         const student = await Student.findOne({ index })
 
         if (!student)
-            return res.status(404).send({ message: 'Index not found' })
+            return res.send({ code: 404 })
 
         if (student.nic != nic)
-            return res.status(401).send({ message: 'Invalid NIC' })
+            return res.send({ code: 401 })
 
-        return res.status(200).send(student)
+        return res.send({ code: 200, student })
 
     } catch (error) {
-        return res.status(500).json(error)
+        return res.send({ code: 500 })
     }
 });
 
