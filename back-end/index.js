@@ -10,11 +10,7 @@ const PORT = process.env.PORT
 const DB_URL = process.env.DB_URL
 
 app.use(express.json())
-app.use(cors(
-    {
-        origin: [process.env.FRONT_END_URL]
-    }
-))
+app.use(cors())
 
 app.use('/api/student', studentRoutes)
 app.use('*', (req, res) => {
