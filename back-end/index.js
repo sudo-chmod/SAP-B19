@@ -12,8 +12,8 @@ const DB_URL = process.env.DB_URL
 app.use(express.json())
 app.use(cors())
 
-app.get('/', (req, res) => {
-    res.send('Server is Running!')
+app.use('/', (req, res) => {
+    res.json('Server is Running!')
 })
 
 app.use('/api/student', studentRoutes)
