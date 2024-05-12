@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from 'axios';
+import { SpeedInsights } from '@vercel/speed-insights/react';
 
 function App() {
   const API_URL = process.env.REACT_APP_API_URL;
@@ -8,7 +9,7 @@ function App() {
 
   const [index, setIndex] = useState("");
   const [nic, setNic] = useState("");
-  
+
   const [indexError, setIndexError] = useState("");
   const [nicError, setNicError] = useState("");
   const [serverError, setServerError] = useState("");
@@ -137,6 +138,7 @@ function App() {
           </div>
         )}
       </div>
+      <SpeedInsights />
     </>
   );
 }
