@@ -15,7 +15,7 @@ def insert_data_and_update_ranks(df, degree_program):
         name, gpa, tot_credit, tot_creditXgrade, result = scrap.get_data(index, nic)
         index_arr.append(index)
         gpa_arr.append(gpa)
-        print(f"{i + 1} | {index} | {name} | {gpa}")
+        print(f"{i + 1} | {index} | {gpa} | {name}")
         data = {
             "name": name,
             "index": index,
@@ -29,6 +29,7 @@ def insert_data_and_update_ranks(df, degree_program):
         }
         collection.insert_one(data)
 
+    print()
     df_rank = pd.DataFrame({"Index": index_arr, "GPA": gpa_arr})
     df_rank["Rank"] = df_rank["GPA"].rank(ascending=False).astype(int)
     for i in range(raw_count):

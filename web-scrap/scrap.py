@@ -32,7 +32,10 @@ def get_data(index, nic):
         'E' : 0.0,
         'F' : 0.0,
         'MC' : 0.0,
-        'CN' : 0.0
+        'CN' : 0.0,
+        'CM' : 0.0,
+        'NC' : 0.0,
+        'WH' : 0.0
     }
 
     total_credit = 0
@@ -46,14 +49,21 @@ def get_data(index, nic):
             i += 1
             continue
 
-        sub_credit = driver.find_element(By.XPATH, "/html/body/div[1]/table/tbody/tr[" + str(i) + "]/td[4]/span").text
-        if sub_credit == '0':
-            i += 1
-            continue
-
         sub_code = driver.find_element(By.XPATH, "/html/body/div[1]/table/tbody/tr[" + str(i) + "]/td[1]").text.strip().split(" ")[0]
         sub_name = " ".join(driver.find_element(By.XPATH, "/html/body/div[1]/table/tbody/tr[" + str(i) + "]/td[1]").text.strip().split(" ")[1:])
         sub_grade = driver.find_element(By.XPATH, "/html/body/div[1]/table/tbody/tr[" + str(i) + "]/td[5]").text
+        sub_credit = driver.find_element(By.XPATH, "/html/body/div[1]/table/tbody/tr[" + str(i) + "]/td[4]/span").text
+
+        if sub_credit == '0':
+            result.append({
+                "subCode": sub_code,
+                "subName": sub_name,
+                "subGrade": sub_grade,
+                "subCredit": sub_credit,
+                "subCreditXGrade": 0
+            })
+            i += 1
+            continue
 
         if (i != table1_raw_count):
             next_sub_code = driver.find_element(By.XPATH, "/html/body/div[1]/table/tbody/tr[" + str(i + 1) + "]/td[1]").text.strip().split(" ")[0]
@@ -102,14 +112,22 @@ def get_data(index, nic):
         
     j = 1
     while(j <= table2_raw_count):
-        sub_credit = driver.find_element(By.XPATH, "/html/body/div[1]/table[2]/tbody/tr[" + str(j) + "]/td[4]/span").text
-        if sub_credit == '0':
-            j += 1
-            continue
-
         sub_code = driver.find_element(By.XPATH, "/html/body/div[1]/table[2]/tbody/tr[" + str(j) + "]/td[1]").text.strip().split(" ")[0]
         sub_name = " ".join(driver.find_element(By.XPATH, "/html/body/div[1]/table[2]/tbody/tr[" + str(j) + "]/td[1]").text.strip().split(" ")[1:])
         sub_grade = driver.find_element(By.XPATH, "/html/body/div[1]/table[2]/tbody/tr[" + str(j) + "]/td[5]").text
+        sub_credit = driver.find_element(By.XPATH, "/html/body/div[1]/table[2]/tbody/tr[" + str(j) + "]/td[4]/span").text
+
+        if sub_credit == '0':
+            result.append({
+                "subCode": sub_code,
+                "subName": sub_name,
+                "subGrade": sub_grade,
+                "subCredit": sub_credit,
+                "subCreditXGrade": 0
+            })
+            j += 1
+            continue
+
         sub_creditXgrade = round(int(sub_credit) * grades[sub_grade], 1)
         total_credit += int(sub_credit)
         total_creditXgrade += sub_creditXgrade
