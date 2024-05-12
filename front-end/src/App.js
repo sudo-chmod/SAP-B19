@@ -157,7 +157,7 @@ function App() {
               </h6>
             </div>
             <br />
-           <div className="row" style={{ marginBottom: '2vh' }}>
+           <div className="row">
                 <div className="col-md-6">
 
                   <p className="text-lg-end text-center" style={{paddingRight:'0'}}>
