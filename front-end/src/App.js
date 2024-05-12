@@ -137,8 +137,8 @@ function App() {
             </div>
           </div>
         )}
+        <SpeedInsights />
       </div>
-      <SpeedInsights />
     </>
   );
 }
