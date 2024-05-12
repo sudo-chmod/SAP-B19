@@ -157,11 +157,17 @@ function App() {
               </h6>
             </div>
             <br />
-            <p className="text-center" style={{ margin: "1vh" }}>
-              <strong>MC</strong> - Medical | <strong>CM</strong> - Completed |{" "}
-              <strong>NC</strong> - Not Completed | <strong>F</strong> - Absent |{" "}
-              <strong>CN</strong> - Cancelled | <strong>WH</strong> - Withheld
-            </p>
+           <div className="row" style={{ marginBottom: '2vh' }}>
+                <div className="col-md-6">
+
+                  <p className="text-lg-end text-center" style={{paddingRight:'0'}}>
+                    <strong>MC</strong> - Medical | <strong>CM</strong> - Completed | <strong>NC</strong> - Not Completed |</p>
+                </div>
+                <div className="col-md-6" style={{  paddingLeft: '0' }}>
+                  <p className="text-lg-start text-center"><strong>F</strong> - Absent | <strong>CN</strong> - Cancelled | <strong>WH</strong> - Withheld
+                  </p>
+                </div>
+              </div>
             <div className="row">
               <div className="col-12">
                 <div className="table-responsive">
