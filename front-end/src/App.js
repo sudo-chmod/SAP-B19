@@ -159,8 +159,8 @@ function App() {
             <br />
             <p className="text-center" style={{ margin: "1vh" }}>
               <strong>MC</strong> - Medical | <strong>CM</strong> - Completed |{" "}
-              <strong>NC</strong> - Not Completed | <strong>F</strong> - Absent
-              | <strong>CN</strong> - Cancelled | <strong>WH</strong> - Withheld
+              <strong>NC</strong> - Not Completed | <strong>F</strong> - Absent |{" "}
+              <strong>CN</strong> - Cancelled | <strong>WH</strong> - Withheld
             </p>
             <div className="row">
               <div className="col-12">
@@ -221,7 +221,7 @@ function App() {
                         <td>
                           <center>
                             <strong>
-                              &#931; ( Credit ) = {student.totalCredit}{" "}
+                              &#931; (Credit) = {student.totalCredit}{" "}
                             </strong>
                           </center>
                         </td>
@@ -229,7 +229,7 @@ function App() {
                         <td>
                           <center>
                             <strong>
-                              &#931; ( Grade x Credit ) ={" "}
+                              &#931; (Grade x Credit) ={" "}
                               {student.totalCreditXGrade}
                             </strong>
                           </center>
@@ -238,10 +238,9 @@ function App() {
                     </tbody>
                   </table>
                 </div>
-                <p style={{ margin: "2vh 0 3vh 0", textAlign: "left" }}>
+                <p style={{ margin: "2vh 0 3vh 0"}}>
                   <div className="text-center">
-                    <strong>GPA</strong> = &#931; ( Grade x Credit ) &#247; &#931; (
-                    Credit ) = {student.totalCreditXGrade} &#247; {student.totalCredit} = {student.gpa}
+                    <strong>GPA</strong> = &#931; (Grade x Credit) &#247; &#931; (Credit) = {student.totalCreditXGrade} &#247; {student.totalCredit} = {student.gpa}
                     <br />
                   </div>
                 </p>
