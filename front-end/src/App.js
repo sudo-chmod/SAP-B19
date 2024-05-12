@@ -1,6 +1,20 @@
 import React, { useState } from "react";
 import axios from 'axios';
 import { SpeedInsights } from '@vercel/speed-insights/react';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+// const notify = () => toast.error('Oops! Something went wrong!', {
+//   position: "top-right",
+//   autoClose: 5000,
+//   hideProgressBar: false,
+//   closeOnClick: true,
+//   pauseOnHover: true,
+//   draggable: true,
+//   progress: undefined,
+//   theme: "light",
+//   transition: "bounce",
+// });
 
 function App() {
   const API_URL = process.env.REACT_APP_API_URL;
@@ -51,6 +65,7 @@ function App() {
             setServerError("Oops! Something went wrong!");
             setIndexError("");
             setNicError("");
+            toast.error('Oops! Something went wrong!')
           }
         })
         .catch((err) => {
@@ -58,16 +73,20 @@ function App() {
           setServerError("Oops! Something went wrong!");
           setIndexError("");
           setNicError("");
+          toast.error('Oops! Something went wrong!')
         });
     }
   };
 
   return (
     <>
+      <ToastContainer />
+    
       <div>
         {state === "First" && (
           <div>
             <div className="container" >
+                   
               <div className="row align-items-center" style={{ height: '100vh' }}>
                 <div className="col-12">
                   <div className="alert alert-light" role="alert">
@@ -77,6 +96,8 @@ function App() {
                     <br />
                     <h2 className="alert-heading" style={{ textAlign: 'center' }}>Student Academic Performance-Batch 19</h2>
                     <br />
+                   
+            
                     <main className="form-signin m-auto col-lg-4">
                       <form onSubmit={sendData}>
                         <div className="form-floating">
@@ -98,26 +119,26 @@ function App() {
         )}
         {state === "Normal" && (
           <div className="container">
-            <div className="row" style={{ marginTop: '3vh' }}>
+            <div className="row" style={{ marginTop: '8vh' ,marginBottom:'2vh'}}>
               <div className="col-12">
                 <h2 className="text-center">Student Academic Performance-Batch 19</h2>
               </div>
             </div>
-
-            <p className="text-center">
-              <strong>MC</strong> - Medical | <strong>EC</strong> - Exceptional Circumstances | <strong>CM</strong> - Completed | <strong>NC</strong> - Not Completed | <strong>F</strong> - Absent | <strong>CN</strong> - Cancelled | <strong>WH</strong> - Withheld
+            
+            <p className="text-center" style={{marginBottom:'2vh'}}>
+              <strong>MC</strong> - Medical | <strong>CM</strong> - Completed | <strong>NC</strong> - Not Completed | <strong>F</strong> - Absent | <strong>CN</strong> - Cancelled | <strong>WH</strong> - Withheld
             </p>
 
-            <div className="row">
-              <div className="col-md-6">
-                <h6><strong>Name:</strong> {student.name}</h6>
-                <h6><strong>Index No.: </strong> {student.index}</h6>
-                <h6><strong>Degree Program: </strong> {student.degreeProgram}</h6>
+            <div className="row" style={{ justifyContent: "center", marginTop:"4vh"}}>
+              <div className="col-md-4">
+                <h5><strong>Name:</strong> {student.name}</h5>
+                <h5><strong>Index No.: </strong> {student.index}</h5>
+                <h5><strong>Degree Program: </strong> {student.degreeProgram}</h5>
               </div>
-              <div className="col-md-6">
-                <h6><strong>Current GPA: </strong> {student.gpa}</h6>
-                <h6><strong>Current Rank: </strong> {student.rank}</h6>
-                <h6><strong>Total Credits: </strong> {student.totalCredit}</h6>
+              <div className="col-md-4">
+                <h5><strong>Current GPA: </strong> {student.gpa}</h5>
+                <h5><strong>Current Rank: </strong> {student.rank}</h5>
+                <h5><strong>Total Credits: </strong> {student.totalCredit}</h5>
               </div>
             </div>
 
