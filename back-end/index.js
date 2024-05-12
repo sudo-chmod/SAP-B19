@@ -15,9 +15,7 @@ app.use(cors())
 app.use('/', (req, res) => {
     res.send('Server is Running!')
 })
-
 app.use('/api/student', studentRoutes)
-
 app.use('*', (req, res) => {
     res.send('No Route Found!')
 })
