@@ -2,14 +2,18 @@ import React, { useState } from "react";
 import axios from 'axios';
 
 function App() {
+  const API_URL = process.env.REACT_APP_API_URL;
+
   const [state, setState] = useState("First");
+
   const [index, setIndex] = useState("");
   const [nic, setNic] = useState("");
-  const [student, setStudent] = useState("");
+  
   const [indexError, setIndexError] = useState("");
   const [nicError, setNicError] = useState("");
   const [serverError, setServerError] = useState("");
-
+  
+  const [student, setStudent] = useState("");
 
   const sendData = (e) => {
     e.preventDefault();
@@ -20,46 +24,42 @@ function App() {
       setNicError("");
       setServerError("");
       return;
-    }
-
-    if (nic === "") {
+    } else if (nic === "") {
       setState("Error");
       setNicError("Please enter the NIC number!");
       setIndexError("");
       setServerError("");
       return;
-    }
-    
-    axios.post("https://sap-b19-api.vercel.app/api/student/", { index, nic })
-      .then((response) => {
-        if (response.data.code === 200) {
-          setState("Normal");
-          setStudent(response.data.student);
-        } else if (response.data.code === 404) {
-          setState("Error");
-          setIndexError("Invalid INDEX! Please enter a valid index number!");
-          setNicError("");
-          setServerError("");
-        } else if (response.data.code === 401) {
-          setState("Error");
-          setNicError("Incorrect NIC! Please enter the correct NIC!");
-          setIndexError("");
-        } else {
+    } else {
+      axios.post(API_URL + "/api/student/", { index, nic })
+        .then((response) => {
+          if (response.data.code === 200) {
+            setState("Normal");
+            setStudent(response.data.student);
+          } else if (response.data.code === 404) {
+            setState("Error");
+            setIndexError("Invalid INDEX! Please enter a valid index number!");
+            setNicError("");
+            setServerError("");
+          } else if (response.data.code === 401) {
+            setState("Error");
+            setNicError("Incorrect NIC! Please enter the correct NIC!");
+            setIndexError("");
+          } else {
+            setState("Error");
+            setServerError("Oops! Something went wrong!");
+            setIndexError("");
+            setNicError("");
+          }
+        })
+        .catch((err) => {
           setState("Error");
           setServerError("Oops! Something went wrong!");
           setIndexError("");
           setNicError("");
-        }
-      })
-      .catch((err) => {
-        setState("Error");
-        setServerError("Oops! Something went wrong!");
-        setIndexError("");
-        setNicError("");
-      });
+        });
+    }
   };
-
-  
 
   return (
     <>
